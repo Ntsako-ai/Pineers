@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PINEERRS | Premium Goodies</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Fredoka+One&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- PREMIUM LIQUID THEME VARIABLES --- */
+        :root {
+            --primary-pink: #ff007b;
+            --primary-purple: #7a00ff;
+            --deep-bg: #0a0510; 
+            --white: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-glow: 0 0 20px rgba(255, 0, 123, 0.4);
+            --transition-smooth: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            cursor: none; 
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--deep-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(122, 0, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 123, 0.1) 0%, transparent 40%);
+            color: #eee;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- PINK LIQUID POINTER --- */
+        #cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 0, 123, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+
+        #cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px var(--primary-pink);
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: transparent;
+            z-index: 1001;
+            transition: var(--transition-smooth);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 5, 16, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 0.8rem 5%;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Creepster', cursive;
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-shadow: var(--neon-glow);
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition-smooth);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 60vh;
+            background-image: url('Pineerr.jpeg'); 
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Professional fade mask */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+            filter: saturate(1.3) brightness(1.1);
+            margin-bottom: -50px;
+        }
+
+        /* --- CATALOG & CARDS --- */
+        .catalog { padding: 6rem 5%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+        .section-title { font-family: 'Fredoka One', cursive; text-align: center; font-size: 2.5rem; margin-bottom: 3.5rem; color: var(--white); }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; }
+
+        .product-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 28px;
+            padding: 1.8rem;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+            text-align: center;
+        }
+
+        .product-image {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            height: 240px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* --- BUTTONS --- */
+        .add-to-cart {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
+            color: white;
+            border: none;
+            border-radius: 35px;
+            font-weight: 700;
+            cursor: none;
+            margin-top: 1.2rem;
+            transition: var(--transition-smooth);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(255, 0, 123, 0.4);
+        }
+
+        .add-to-cart:hover { transform: translateY(-3px) scale(1.03); filter: brightness(1.15); }
+
+        /* --- CONTACT --- */
+        .contact-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            padding: 4.5rem 2.5rem;
+            border-radius: 35px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .contact-item label { color: var(--primary-pink); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 800; display: block; margin-bottom: 10px; }
+        .contact-item a { font-size: 1.5rem; color: white; text-decoration: none; font-weight: 700; display: block; margin-bottom: 15px; transition: 0.3s; }
+
+        /* --- REVEAL ANIMATION --- */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s var(--transition-smooth); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- MOBILE OPTIMIZATION: HEADER FIT --- */
+        @media (max-width: 768px) {
+            * { cursor: auto; }
+            #cursor-glow, #cursor-dot { display: none; }
+            .nav-links { display: none; }
+            
+            .hero {
+                height: auto;
+                min-height: 250px;
+                aspect-ratio: 16 / 9; /* Forces the header image to keep its full shape */
+                background-size: contain; /* Ensures the whole picture is visible */
+                background-position: center top;
+                margin-top: 85px; /* Adjusts for the fixed navbar */
+                -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+                mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+            }
+
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .product-card { padding: 1rem; }
+            .product-image { height: 160px; }
+            .section-title { font-size: 1.8rem; margin-bottom: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-glow"></div>
+    <div id="cursor-dot"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">PINEERRS</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#catalog">Catalog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero"></header>
+
+    <section id="catalog" class="catalog">
+        <h2 class="section-title reveal">Top Sellers</h2>
+        <div class="product-grid">
+            
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="stilpane.jpeg" alt="Stilpane" style="width:100%; height:100%; object-fit:contain;">
+                </div>
+                <h3>Stilpane Syrup</h3>
+                <p style="color: var(--primary-pink); font-weight: 900; font-size: 1.3rem;">R80</p>
+                <button class="add-to-cart" onclick="contactWholesale()">Add to Cart</button>
+            </div>
+
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="astrapain.jpeg" alt="Astrapane" style="width:100%; height:100%; object-fit:contain;">
+                </div>
+                <h3>Astrapain Syrup</h3>
+                <p style="color: var(--primary-pink); font-weight: 900; font-size: 1.3rem;">R80</p>
+                <button class="add-to-cart" onclick="contactWholesale()">Add to Cart</button>
+            </div>
+            
+            <div class="product-card reveal">
+                <div class="product-image">
+                    <img src="painagon.jpeg" alt="Painagon" style="width:100%; height:100%; object-fit:contain;">
+                </div>
+                <h3>Painagon Syrup</h3>
+                <p style="color: var(--primary-pink); font-weight: 900; font-size: 1.3rem;">R80</p>
+                <button class="add-to-cart" onclick="contactWholesale()">Add to Cart</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section" style="padding: 6rem 5% 8rem;">
+        <div class="contact-container reveal">
+            <h2 class="section-title" style="font-size: 2rem; margin-bottom: 2rem;">Order Now</h2>
+            <div class="contact-item">
+                <label>WhatsApp Lines</label>
+                <a href="https://wa.me/27683331283">068 333 1283</a>
+            </div>
+            <div class="contact-item" style="margin-top: 20px;">
+                <label>Region</label>
+                <p>South Africa</p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 4rem; text-align: center; border-top: 1px solid var(--glass-border);">
+        <p style="opacity: 0.4; color: white;">&copy; 2026 Pineerrs. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // WhatsApp Load Balancing Logic
+        function contactWholesale() {
+            const num1 = "https://wa.me/27683331283";
+            const num2 = "https://wa.me/27726522465";
+            const target = Math.random() > 0.5 ? num1 : num2;
+            window.open(target, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const glow = document.getElementById('cursor-glow');
+            const dot = document.getElementById('cursor-dot');
+            const navbar = document.getElementById('navbar');
+
+            // Pointer Movement
+            document.addEventListener('mousemove', (e) => {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+                dot.style.left = e.clientX + 'px';
+                dot.style.top = e.clientY + 'px';
+            });
+
+            // Scroll Animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Navbar Effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            });
+        });
+    </script>
+</body>
+</html>
